@@ -23,7 +23,7 @@ namespace Schedule.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Players/Create.cshtml, Ln 18. 
       return View();
     }
 
@@ -43,8 +43,8 @@ namespace Schedule.Controllers
     public ActionResult Details(int id)
     {
       var thisPlayer = _db.Players
-        .Include(player => player.JoinPlrSprt)
-        .ThenInclude(join => join.Sport)
+        .Include(player => player.JoinPlrSprt)  //Details View, Ln 11 
+        .ThenInclude(join => join.Sport)  //Details View, Ln 19 
         .FirstOrDefault(player => player.PlayerId == id);
       return View(thisPlayer);
     }
@@ -52,7 +52,7 @@ namespace Schedule.Controllers
     public ActionResult Edit(int id)
     {
       var thisPlayer = _db.Players.FirstOrDefault(player => player.PlayerId == id);
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Edit View, Ln 22
       return View(thisPlayer);
     }
 
@@ -63,19 +63,19 @@ namespace Schedule.Controllers
       {
         _db.SportPlayer.Add(new SportPlayer() { SportId = SportId, PlayerId = player.PlayerId});
       }
-      _db.Entry(player).State = EntityState.Modified;
-      _db.SaveChanges();
+      _db.Entry(player).State = EntityState.Modified;  //Updates the entry/-ies in the database. 
+      _db.SaveChanges(); //Saves changes to database 
       return RedirectToAction("Index");
     }
 
     public ActionResult AddSport(int id)
     {
-      var thisPlayer = _db.Players.FirstOrDefault(player => player.PlayerId == id);
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+      var thisPlayer = _db.Players.FirstOrDefault(player => player.PlayerId == id); 
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Players/AddSport.cshtml, Ln 16. 
       return View(thisPlayer);
     }
 
-    [HttpPost]
+    [HttpPost]  //(Destination for Views/Players/AddSport.cshtml, Ln 18) 
     public ActionResult AddSport(Player player, int SportId)
     {
       if (SportId != 0)
@@ -92,7 +92,7 @@ namespace Schedule.Controllers
       return View(thisPlayer);
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpPost, ActionName("Delete")]  //(Destination for Views/Players/Delete.cshtml, Ln 12) 
     public ActionResult DeleteConfirmed(int id)
     {
       var thisPlayer = _db.Players.FirstOrDefault(player => player.PlayerId == id);
@@ -103,7 +103,7 @@ namespace Schedule.Controllers
 
     [HttpPost]
     public ActionResult DeleteSport(int joinId)
-    {
+    {  //Removes the connection between Sport and a Player. 
       var joinEntry = _db.SportPlayer.FirstOrDefault(entry => entry.SportPlayerId == joinId);
       _db.SportPlayer.Remove(joinEntry);
       _db.SaveChanges();

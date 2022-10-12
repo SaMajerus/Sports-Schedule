@@ -11,9 +11,7 @@ namespace Schedule.Models
     }
     public string Term { get; set; }
     public int SemesterId { get; set; }
-    public int PlayerId { get; set; }
     public int SportId { get; set; }
-    public virtual Player Player { get; set; }
     public virtual Sport Sport { get; set; }
     public virtual ICollection<SemesterSport> JoinSmstrSprt { get; set; }
   }

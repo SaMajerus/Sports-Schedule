@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Semester;
+
+<h2>Semester Details</h2>
+<h3>@Html.DisplayNameFor(model => model.Term): @Html.DisplayFor(model => model.Term)</h3>
+
+@if(@Model.JoinSmstrSprt.Count == 0)
+{
+  <p>This semester has no sports</p>
+}
+else
+{
+  <h4>Sports being played this semester:</h4>
+  <ul>
+  @foreach(var join in Model.JoinSmstrSprt)
+  {
+    <li>@join.Sport.Title</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to Semesters", "Index")</p>
+<p>@Html.ActionLink("Edit Semester", "Edit", new { id = Model.SemesterId })</p>
+<p>@Html.ActionLink("Delete Semester", "Delete", new { id = Model.SemesterId })</p>

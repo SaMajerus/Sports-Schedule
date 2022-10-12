@@ -24,41 +24,40 @@ namespace Schedule.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.PlayerId = new SelectList(_db.Players, "PlayerId", "Name");
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Semesters/Create.cshtml, Ln 14.
       return View();
     }
 
-    [HttpPost]
-    public ActionResult Create(Semester semester, int SportId)
+    [HttpPost]  //(Destination for Views/Semesters/Create.cshtml, Ln 16) 
+    public ActionResult Create(Semester semester, string term, int SemesterId, int SportId)
     {
-      _db.Semesters.Add(semester);
-      _db.SaveChanges();
       if (SportId != 0)
       {
         _db.SemesterSport.Add(new SemesterSport() { SportId = SportId, SemesterId = semester.SemesterId });
         _db.SaveChanges();
       }
+      _db.Semesters.Add(semester);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
       var thisSemester = _db.Semesters
-        .Include(semester => semester.JoinSmstrSprt)
-        .ThenInclude(join => join.Sport)
+        .Include(semester => semester.JoinSmstrSprt)  //Details View, Ln 10
+        .ThenInclude(join => join.Sport)  //Details View, Ln 20 
         .FirstOrDefault(semester => semester.SemesterId == id);
       return View(thisSemester);
     }
 
     public ActionResult Edit(int id)
-    {
-      ViewBag.PlayerId = new SelectList(_db.Players, "PlayerId", "Name");
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+    {  
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Semesters/Edit.cshtml, Ln 19 
       Semester thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id);
       return View(thisSemester);
     }
 
-    [HttpPost]
+    [HttpPost]  //(Destination for Views/Semesters/Edit.cshtml, Ln 21)
     public ActionResult Edit(Semester semester)
     {
       _db.Entry(semester).State = EntityState.Modified;
@@ -72,7 +71,7 @@ namespace Schedule.Controllers
       return View(thisSemester);
     }
 
-    [HttpPost, ActionName("Delete")]
+    [HttpPost, ActionName("Delete")] 
     public ActionResult DeleteConfirmed(int id)
     {
       Semester thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id);

@@ -7,12 +7,12 @@ namespace Schedule.Models
   {
     public Player()
     {
-      this.JoinPlrSprt = new HashSet<PlayerSport>();
+      this.JoinPlrSprt = new HashSet<SportPlayer>();
     }
 
     public string Name { get; set; }
     public int PlayerId { get; set; }
     public int Grade { get; set; }
-    public virtual ICollection<PlayerSport> JoinPlrSprt { get; set; }
+    public virtual ICollection<SportPlayer> JoinPlrSprt { get; set; }
   }
 }

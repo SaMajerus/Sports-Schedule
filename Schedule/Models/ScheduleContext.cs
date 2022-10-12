@@ -7,8 +7,9 @@ namespace Schedule.Models
 
     public DbSet<Player> Players { get; set;}
     public DbSet<Sport> Sports { get; set; }
+    public DbSet<Semester> Semesters { get; set; }
     public DbSet<SemesterSport> SemesterSport { get; set; }
-    public DbSet<PlayerSport> PlayerSport { get; set; }
+    public DbSet<SportPlayer> SportPlayer { get; set; }
 
     public ScheduleContext(DbContextOptions options) : base(options) { }
 
