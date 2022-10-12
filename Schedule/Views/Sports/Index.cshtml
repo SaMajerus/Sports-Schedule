@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Schedule.Models;
+@model List<Registrar.Models.Sport>;
+
+<h1>List of Sports:</h1>
+
+<ul>
+  @foreach(Sport sport in Model)
+  {
+    <li>@Html.ActionLink($"{sport.Title}", "Details", new { id = sport.SportId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new sport", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Player
+
+<h2>Edit</h2>
+
+<h4>Edit this player: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.PlayerId)
+
+  @Html.Label("Change player name")
+  @Html.EditorFor(model => model.Name)
+  
+  @Html.Label("Change player grade")
+  @Html.EditorFor(model => model.Grade)
+
+  @Html.Label("Select sport")
+  @Html.DropDownList("SportId")
+
+  @Html.Label("Select semester")
+  @Html.DropDownList("SemesterId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

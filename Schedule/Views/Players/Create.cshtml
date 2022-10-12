@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Player
+
+<h4>Add a new player</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.Label("Player Name")
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.Label("Player Grade")
+  @Html.TextBoxFor(model => model.Grade)
+
+  @Html.Label("Select sport to add to player")
+  @Html.DropDownList("SportId")
+
+  @Html.Label("Select semester to add to player")
+  @Html.DropDownList("SemesterId")
+
+  <input type="submit" value="Add new player" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Show all players", "Index")</p>

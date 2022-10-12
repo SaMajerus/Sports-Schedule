@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Sport;
+
+<h2>Sport Details</h2>
+<h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
+
+@if(@Model.JoinPlrSprt.Count == 0)
+{
+  <p>There are no players signed up for this sport</p>
+}
+else
+{
+  <h4>This sport's player list:</h4>
+  <ul>
+  @foreach(var join in Model.JoinPlrSprt)
+  {
+    <li>@join.Player.Name</li>
+  }
+  </ul>
+}
+
+@if(@Model.JoinSmstrSprt.Count == 0)
+{
+  <p>This sport is not assigned to a Semester</p>
+}
+else
+{
+  <h4>This sport's semester:</h4>
+  <ul>
+  @foreach(var join in Model.JoinSmstrSprt)
+  {
+    <li>@join.Semester.Term</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to sports", "Index")</p>
+<p>@Html.ActionLink("Edit Sport", "Edit", new { id = Model.SportId })</p>
+<p>@Html.ActionLink("Delete Sport", "Delete", new { id = Model.SportId })</p>

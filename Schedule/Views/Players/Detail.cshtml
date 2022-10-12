@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Player
+
+<h2>Player Details</h2>
+<h3>Player Name: @Html.DisplayFor(model => model.Name)</h3>
+<h3>Player Grade: @Html.DisplayFor(model => model.Grade)</h3>
+
+@if(@Model.JoinPlrSprt.Count == 0)
+{
+  <p>This player is not playing any sports</p>
+}
+else
+{
+  <h4>Sports for this player:</h4>
+  <ul>
+  @foreach(var join in Model.JoinPlrSprt)
+  {
+    <li>@join.Sport.Title</li>
+
+    @using (Html.BeginForm("DeleteSport", "Players"))
+    {
+      @Html.Hidden("joinId", @join.SportId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Edit Player", "Edit", new { id = Model.PlayerId })</p>
+<p>@Html.ActionLink("Delete Player", "Delete", new { id = Model.PlayerId })</p>
+<p>@Html.ActionLink("Add a Sport", "AddSport", new { id = Model.PlayerId })</p>

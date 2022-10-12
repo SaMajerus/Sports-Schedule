@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Sport
+
+<h2>Are you sure you want to remove this Sport?</h2>
+
+@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}
+@Html.ActionLink("Back to List", "Index")

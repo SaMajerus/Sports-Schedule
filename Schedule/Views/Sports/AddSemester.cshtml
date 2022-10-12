@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Sport
+
+<h2>Add a semester</h2>
+
+<h4>Add a semester for this sport: @Html.DisplayFor(model => model.Title)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.SportId)
+
+  @Html.Label("Select semester")
+  @Html.DropDownList("SemesterId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

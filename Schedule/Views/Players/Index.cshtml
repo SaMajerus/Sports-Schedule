@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+@using Schedule.Models;
+@model List<Schedule.Models.Player>
+
+<h1>Player list:</h1>
+
+<ul>
+  @foreach(Player player in Model)
+  {
+    <li>@Html.ActionLink($"{player.Name}", "Details", new { id = player.PlayerId } )</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new player", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
