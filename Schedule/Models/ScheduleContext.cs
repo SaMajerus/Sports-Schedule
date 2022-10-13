@@ -10,6 +10,7 @@ namespace Schedule.Models
     public DbSet<Semester> Semesters { get; set; }
     public DbSet<SemesterSport> SemesterSport { get; set; }
     public DbSet<SportPlayer> SportPlayer { get; set; }
+    public DbSet<SemesterPlayer> SemesterPlayer { get; set; }
 
     public ScheduleContext(DbContextOptions options) : base(options) { }
 

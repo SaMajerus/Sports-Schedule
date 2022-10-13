@@ -24,6 +24,7 @@ namespace Schedule.Controllers
     public ActionResult Create()
     {
       ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Players/Create.cshtml, Ln 18. 
+      ViewBag.SemesterId = new SelectList(_db.Semesters, "SemesterId", "Term");
       return View();
     }
 
@@ -45,6 +46,8 @@ namespace Schedule.Controllers
       var thisPlayer = _db.Players
         .Include(player => player.JoinPlrSprt)  //Details View, Ln 11 
         .ThenInclude(join => join.Sport)  //Details View, Ln 19 
+        .Include(player => player.JoinSmstrPlyr)
+        .ThenInclude(join => join.Semester)
         .FirstOrDefault(player => player.PlayerId == id);
       return View(thisPlayer);
     }
@@ -106,6 +109,23 @@ namespace Schedule.Controllers
       var joinEntry = _db.SportPlayer.FirstOrDefault(entry => entry.SportPlayerId == joinId);
       _db.SportPlayer.Remove(joinEntry);
       _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    public ActionResult AddSemester(int id)
+    {
+      var thisPlayer = _db.Players.FirstOrDefault(player => player.PlayerId == id); 
+      ViewBag.SemesterId = new SelectList(_db.Semesters, "SemesterId", "Term");
+      return View(thisPlayer);
+    }
+
+    [HttpPost]
+    public ActionResult AddSemester(Player player, int SemesterId)
+    {
+      if (SemesterId != 0)
+      {
+        _db.SemesterPlayer.Add(new SemesterPlayer() { SemesterId = SemesterId, PlayerId = player.PlayerId});
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }

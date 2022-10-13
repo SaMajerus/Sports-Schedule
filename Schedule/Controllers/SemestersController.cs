@@ -46,6 +46,8 @@ namespace Schedule.Controllers
       var thisSemester = _db.Semesters
         .Include(semester => semester.JoinSmstrSprt)  //Details View, Ln 10
         .ThenInclude(join => join.Sport)  //Details View, Ln 20 
+        .Include(semester => semester.JoinSmstrPlyr)
+        .ThenInclude(join => join.Player)
         .FirstOrDefault(semester => semester.SemesterId == id);
       return View(thisSemester);
     }
@@ -92,6 +94,23 @@ namespace Schedule.Controllers
       if (SportId != 0)
       {
         _db.SemesterSport.Add(new SemesterSport() { SportId = SportId, SemesterId = semester.SemesterId});
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
+    public ActionResult AddPlayer(int id)
+    {
+      var thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id); 
+      ViewBag.PlayerId = new SelectList(_db.Players, "PlayerId", "Name");
+      return View(thisSemester);
+    }
+
+    [HttpPost]
+    public ActionResult AddPlayer(Semester semester, int PlayerId)
+    {
+      if (PlayerId != 0)
+      {
+        _db.SemesterPlayer.Add(new SemesterPlayer() { PlayerId = PlayerId, SemesterId = semester.SemesterId});
         _db.SaveChanges();
       }
       return RedirectToAction("Index");

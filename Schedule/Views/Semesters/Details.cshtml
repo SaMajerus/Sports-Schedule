@@ -21,8 +21,23 @@ else
   }
   </ul>
 }
+@if(@Model.JoinSmstrPlyr.Count == 0)
+{
+  <p>This semester has no players</p>
+}
+else
+{
+  <h4>Players in this semester:</h4>
+  <ul>
+  @foreach(var join in Model.JoinSmstrPlyr)
+  {
+    <li>@join.Player.Name</li>
+  }
+  </ul>
+}
 
 <p>@Html.ActionLink("Back to Semesters", "Index")</p>
 <p>@Html.ActionLink("Edit Semester", "Edit", new { id = Model.SemesterId })</p>
 <p>@Html.ActionLink("Delete Semester", "Delete", new { id = Model.SemesterId })</p>
 <p>@Html.ActionLink("Add a Sport", "AddSport", new { id = Model.SemesterId })</p>
+<p>@Html.ActionLink("Add a Player", "AddPlayer", new { id = Model.SemesterId })</p>

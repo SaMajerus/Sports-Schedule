@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Schedule.Models.Semester
+
+<h2>Add a player</h2>
+
+<h4>Add a player for this Semester: @Html.DisplayFor(model => model.Term)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.SemesterId)
+
+  @Html.Label("Select player")
+  @Html.DropDownList("PlayerId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
