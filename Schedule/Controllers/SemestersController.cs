@@ -52,7 +52,6 @@ namespace Schedule.Controllers
 
     public ActionResult Edit(int id)
     {  
-      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");  //Connects to:  ../Views/Semesters/Edit.cshtml, Ln 19 
       Semester thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id);
       return View(thisSemester);
     }
@@ -77,6 +76,24 @@ namespace Schedule.Controllers
       Semester thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id);
       _db.Semesters.Remove(thisSemester);
       _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddSport(int id)
+    {
+      var thisSemester = _db.Semesters.FirstOrDefault(semester => semester.SemesterId == id);  //Calls the semester which we'll be adding a Sport for. 
+      ViewBag.SportId = new SelectList(_db.Sports, "SportId", "Title");
+      return View(thisSemester);
+    }
+
+    [HttpPost]
+    public ActionResult AddSport(Semester semester, int SportId)
+    {
+      if (SportId != 0)
+      {
+        _db.SemesterSport.Add(new SemesterSport() { SportId = SportId, SemesterId = semester.SemesterId});
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
   }

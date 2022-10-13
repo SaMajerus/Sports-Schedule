@@ -14,9 +14,6 @@
   @Html.Label("Player Grade")
   @Html.TextBoxFor(model => model.Grade)
 
-  @Html.Label("Select sport to add to player")
-  @Html.DropDownList("SportId")
-
   <input type="submit" value="Add new player" class="btn btn-default" />
 }
 <p>@Html.ActionLink("Show all players", "Index")</p>

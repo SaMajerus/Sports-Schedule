@@ -52,7 +52,6 @@ namespace Schedule.Controllers
     public ActionResult Edit(int id)
     {
       var thisSport = _db.Sports.FirstOrDefault(sport => sport.SportId == id);
-      ViewBag.PlayerId = new SelectList(_db.Players, "PlayerId", "Name"); //Connects to ../Views/Sports/Edit.cshtml, Ln 19. 
       return View(thisSport);
     }
 
