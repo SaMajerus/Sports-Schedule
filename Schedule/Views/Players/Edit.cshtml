@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="~/css/edit.css">
 @{
   Layout = "_Layout";
 }
@@ -12,7 +13,7 @@
 {
   @Html.HiddenFor(model => model.PlayerId)
 
-  @Html.Label("Change player name")
+  @Html.Label("", "Change Player Name", new {@class="labelfor"})
   @Html.EditorFor(model => model.Name)
   
   @Html.Label("Change player grade")

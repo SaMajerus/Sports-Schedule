@@ -1,0 +1,37 @@
+body{
+  text-align: center;
+  background-image: linear-gradient(rgb(45, 189, 50), rgb(13, 0, 255));
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 41%;
+}
+
+p{
+  color: white;
+}
+
+h1{
+  font-family: cursive;
+  font-weight: bold;
+}
+
+a{
+  color: white;
+  text-shadow: 2px 2px rgb(19, 23, 18);
+  border: solid rgb(32, 216, 63);
+  padding: 5px;
+  font-weight: bolder;
+  display: inline-block;
+  text-align: left;
+}
+
+ul{
+  list-style-position: inside;
+  text-align: left;
+  padding-left: 0px;
+  display: inline-block;
+}
+
+li{
+  text-align: left center;
+}

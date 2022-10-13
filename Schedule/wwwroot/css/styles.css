@@ -1,0 +1,41 @@
+body{
+  text-align: center;
+  background-image: linear-gradient(rgb(45, 189, 50), rgb(13, 0, 255));
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 10%;
+}
+
+p{
+  color: white;
+}
+
+h1{
+  font-family: cursive;
+  font-weight: bold;
+}
+
+a{
+  color: white;
+  text-shadow: 2px 2px rgb(19, 23, 18);
+  border: solid rgb(32, 216, 63);
+  padding: 5px;
+  font-weight: bolder;
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+#animate-area {
+  width: 2000px;
+  height: 500px;
+  background-image: url(../img/Carl-botCadetsNB.png);
+  background-position: 0px 0px;
+  background-repeat: repeat-x;
+  animation: animatedBackground 10s linear infinite alternate;
+}

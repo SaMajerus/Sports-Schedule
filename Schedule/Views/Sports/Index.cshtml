@@ -1,18 +1,21 @@
+<link rel="stylesheet" href="~/css/index.css">
 @{
   Layout = "_Layout";
 }
 
+<div class="box"></div>
+
 @using Schedule.Models;
 @model List<Schedule.Models.Sport>;
 
-<h1>List of Sports:</h1>
+<h1>List of Sports:</h1><br>
 
 <ul>
   @foreach(Sport sport in Model)
   {
-    <li>@Html.ActionLink($"{sport.Title}", "Details", new { id = sport.SportId })</li>
+    <li>@Html.ActionLink($"{sport.Title}", "Details", new { id = sport.SportId })</li><br>
   }
 </ul>
 
-<p>@Html.ActionLink("Add new sport", "Create")</p>
+<p>@Html.ActionLink("Add new sport", "Create")</p><br>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

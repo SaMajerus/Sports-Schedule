@@ -1,18 +1,21 @@
+<link rel="stylesheet" href="~/css/index.css">
 @{
   Layout = "_Layout";
 }
 
+<div class="box"></div>
+
 @using Schedule.Models;
 @model List<Schedule.Models.Semester>;
 
-<h1>Semesters</h1>
+<h1>Semesters</h1><br>
 
 <ul>
   @foreach(Semester semester in Model)
   {
-    <li>@Html.ActionLink($"{semester.Term}", "Details", new { id = semester.SemesterId })</li>
+    <li>@Html.ActionLink($"{semester.Term}", "Details", new { id = semester.SemesterId })</li><br>
   }
 </ul>
 
-<p>@Html.ActionLink("Add new semester", "Create")</p>
+<p>@Html.ActionLink("Add new semester", "Create")</p><br>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
